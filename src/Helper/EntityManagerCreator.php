@@ -11,15 +11,15 @@ class EntityManagerCreator
     public static function createEntityManager(): EntityManager
     {
         $config = ORMSetup::createAttributeMetadataConfiguration(
-            paths: array(__DIR__."/src"),
-            isDevMode: true,
+            [__DIR__ . "/.."],
+            true
         );
 
-        $connection = DriverManager::getConnection([
+        $conn = [
             'driver' => 'pdo_sqlite',
-            'path' => __DIR__ . '/../../db.sqlite',
-        ], $config);
+            'path' => __DIR__ . '/../../db.sqlite'
+        ];
 
-        return new EntityManager($connection, $config);
+        return EntityManager::create($conn, $config);
     }
 }
